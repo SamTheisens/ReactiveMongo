@@ -7,15 +7,15 @@ import scala.util.Try
 import scala.reflect.ClassTag
 
 import reactivemongo.core.protocol.Response
-
+import reactivemongo.api.bson.{ BSONDocumentReader, BSONDocumentWriter }
 import reactivemongo.api.bson.buffer.{ ReadableBuffer, WritableBuffer }
 
 trait SerializationPack extends SerializationPackCompat { self: Singleton =>
   type Value
   type ElementProducer
   type Document <: Value
-  type Writer[A]
-  type Reader[A]
+  type Writer[A] = BSONDocumentWriter[A]
+  type Reader[A] = BSONDocumentReader[A]
   type NarrowValueReader[A]
   private[reactivemongo] type WidenValueReader[A]
 
